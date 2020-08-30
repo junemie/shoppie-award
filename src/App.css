@@ -21,11 +21,13 @@
 /* h2 {
   text-align: center;
 } */
-
+p {
+  margin: 0 0 5px 0;
+}
 .container {
   margin: 36px auto;
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
 }
 
 .search-label {
@@ -43,4 +45,84 @@ input {
   color: #444;
   outline: none;
   width: 100%;
+}
+
+tbody {
+  width: 500px;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+
+.results-container {
+  margin: 36px auto;
+  /* display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; */
+  display: flex;
+  flex-direction: row;
+}
+
+.results-wrapper {
+  border: solid red 1px;
+  height: 100%;
+  flex-grow: 2;
+  margin-right: 10px;
+  padding: 16px;
+}
+
+img {
+  width: 45px;
+  margin: auto;
+  display: block;
+}
+
+.primary-photo {
+  width: 32px;
+}
+
+.result-text {
+  padding: 4px 6px;
+  width: 100%;
+}
+
+.findResult.even {
+  background-color: #f6f6f5;
+  border: #fff 1px solid;
+}
+
+.findResult.odd {
+  background-color: #fbfbfb;
+  border: #fff 1px solid;
+}
+
+.nominations {
+  border: black solid 2px;
+  width: 30%;
+  height: 400px;
+}
+
+.no-image {
+  height: 63px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  text-align: center;
+}
+
+button {
+  border: none;
+
+  text-align: center;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+button.nominate {
+  color: white;
+  background: gold;
+  text-decoration: none;
+  border-radius: 5px;
+  border-bottom-width: 3px;
+  margin-bottom: 0;
 }

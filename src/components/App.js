@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../App.css';
 import SearchBar from './SearchBar';
 import MovieResults from './MovieResults';
+import Nominations from './Nomination';
 
 let CancelToken = axios.CancelToken;
 let source = CancelToken.source();
@@ -12,12 +13,15 @@ const App = () => {
   const [isLoading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [movies, setMovies] = useState([]);
-  const cancelToken = useRef(null);
-  //search method
+  const [nominationMovies, setNominationMovies] = useState([]);
+  const [nominationIds, setNominationIds] = useState(new Set());
+
   const search = async (searchValue) => {
     setLoading(true);
     setErrorMessage(null);
+
     let searchUrl = `https://www.omdbapi.com/?s=${searchValue}&apikey=5f88844d`;
+
     const response = await searchRequest(searchUrl, searchValue);
     if (response.Response === 'True') {
       //found the movie
@@ -26,17 +30,20 @@ const App = () => {
       console.log('success', response);
     } else {
       //handle error
-      if (response.Error === 'Incorrect IMDb ID') {
-        setErrorMessage(response.Error);
-        setLoading(false);
+      if (
+        response.Error === 'Incorrect IMDb ID.' ||
+        response.Error === 'Too many results.'
+      ) {
+        setErrorMessage('');
       } else {
         setErrorMessage(response.Error);
-        setMovies([]);
-        setLoading(false);
       }
+      setLoading(false);
+      setMovies([]);
     }
   };
 
+  //API Request
   const searchRequest = async (searchUrl, searchValue) => {
     //Cancel prev request
     source && source.cancel('Operation canceled due to new request.');
@@ -63,7 +70,16 @@ const App = () => {
       }
     }
   };
-  // console.log('error', errorMessage);
+
+  const addNomination = (data, action) => {
+    if (action === 'add') {
+      console.log(nominationMovies, data, 'nomination');
+      let updatedNomination = [...nominationMovies, data];
+      console.log('update ==>', updatedNomination);
+      setNominationMovies(updatedNomination);
+    }
+  };
+
   return (
     <div className="App">
       {console.log('error', errorMessage)}
@@ -72,16 +88,18 @@ const App = () => {
       </header>
       <div className="container">
         <SearchBar search={search} />
-        <div className="movies">
-          {isLoading && !errorMessage ? (
-            <span>Loading...</span>
-          ) : errorMessage ? (
-            <div className="errorMessage">{errorMessage}</div>
-          ) : (
-            movies.map((movie, i) => (
-              <MovieResults key={`${i}-${movie.Title}`} movie={movie} />
-            ))
-          )}
+        <div className="results-container">
+          <div className="results-wrapper">
+            <h3>Results</h3>
+            {isLoading && !errorMessage ? (
+              <span>Loading...</span>
+            ) : errorMessage ? (
+              <div className="errorMessage">{errorMessage}</div>
+            ) : (
+              <MovieResults movies={movies} addNomination={addNomination} />
+            )}
+          </div>
+          <Nominations nominations={nominationMovies}></Nominations>
         </div>
       </div>
     </div>
