@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Nominations = (props) => {
-  const { movies, nominations, nominationHandler } = props;
+  const { nominations, nominationHandler } = props;
 
   return (
     <div className="nominations-wrapper">
