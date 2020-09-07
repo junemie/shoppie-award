@@ -3,13 +3,14 @@
 Website:
 
 <p align="center">
-  <img src="https://giphy.com/gifs/LOVfo1cDqbRoVhIJHm">
+  <img src="https://media.giphy.com/media/LOVfo1cDqbRoVhIJHm/giphy.gif">
 </p>
+
 ## About
 
 Search and nominate up to 5 movies to Shoppie Awards! Type your favorite movie in the search box and click 'nominate' to save favorite films.
 
-### Features
+## Features
 
 - Live Search using OMBD API to display movie results and used axios cancelToken to optimize performance search performance to prevent uneceasry API calls
 - Add mmovie from the search results to nomination list
@@ -19,7 +20,7 @@ Search and nominate up to 5 movies to Shoppie Awards! Type your favorite movie i
 - Loader page when searching the movie
 - Popup modal when user visits the webpage for the first time
 
-### Technologies used:
+## Technologies used:
 
 - React Hooks
 - OMDB API
