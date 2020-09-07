@@ -1,9 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import '../App.css';
 import SearchBar from './SearchBar';
 import MovieResults from './MovieResults';
 import Nominations from './Nomination';
+import Toaster from './Toaster';
+import PopupModal from './PopupModal';
 
 let CancelToken = axios.CancelToken;
 let source = CancelToken.source();
@@ -13,8 +15,8 @@ const App = () => {
   const [isLoading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [movies, setMovies] = useState([]);
-  const [nominationMovies, setNominationMovies] = useState([]);
-  const [nominationIds, setNominationIds] = useState(new Set());
+  const [nominationIds, setNominationIds] = useState({});
+  const [showToaster, setToaster] = useState(false);
 
   const search = async (searchValue) => {
     setLoading(true);
@@ -27,7 +29,6 @@ const App = () => {
       //found the movie
       setMovies(response.Search);
       setLoading(false);
-      console.log('success', response);
     } else {
       //handle error
       if (
@@ -71,37 +72,60 @@ const App = () => {
     }
   };
 
-  const addNomination = (data, action) => {
+  const toasterHandler = () => {
+    setToaster(!showToaster);
+  };
+
+  const nominationHandler = (data, action) => {
     if (action === 'add') {
-      console.log(nominationMovies, data, 'nomination');
-      let updatedNomination = [...nominationMovies, data];
-      console.log('update ==>', updatedNomination);
-      setNominationMovies(updatedNomination);
+      if (Object.keys(nominationIds).length < 5) {
+        let newNominationId = { [data.imdbID]: data };
+
+        setNominationIds({ ...nominationIds, ...newNominationId });
+
+        if (Object.keys(nominationIds).length === 4) toasterHandler();
+      } else {
+        toasterHandler();
+      }
+    } else if (action === 'remove') {
+      let copyNominationId = { ...nominationIds };
+      delete copyNominationId[data.imdbID];
+
+      setNominationIds({ ...copyNominationId });
     }
   };
 
   return (
     <div className="App">
-      {console.log('error', errorMessage)}
+      <PopupModal />
       <header className="app-header">
+        <div className="icon-img" />
         <h2>Shoppie Awards</h2>
+        <div className="icon-img" />
       </header>
       <div className="container">
         <SearchBar search={search} />
-        <div className="results-container">
-          <div className="results-wrapper">
-            <h3>Results</h3>
-            {isLoading && !errorMessage ? (
-              <span>Loading...</span>
-            ) : errorMessage ? (
-              <div className="errorMessage">{errorMessage}</div>
-            ) : (
-              <MovieResults movies={movies} addNomination={addNomination} />
-            )}
-          </div>
-          <Nominations nominations={nominationMovies}></Nominations>
+        <div className="container-wrapper">
+          <MovieResults
+            isLoading={isLoading}
+            errorMessage={errorMessage}
+            movies={movies}
+            nominationHandler={nominationHandler}
+            nominationIds={nominationIds}
+          />
+          <Nominations
+            nominations={nominationIds}
+            movies={movies}
+            nominationHandler={nominationHandler}
+          ></Nominations>
         </div>
       </div>
+      {showToaster && (
+        <Toaster
+          showToaster={showToaster}
+          toasterHandler={toasterHandler}
+        ></Toaster>
+      )}
     </div>
   );
 };

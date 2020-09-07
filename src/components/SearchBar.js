@@ -1,5 +1,4 @@
-import React, { useState, Component } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 const SearchBar = (props) => {
   const [searchValue, setSearchValue] = useState('');
 

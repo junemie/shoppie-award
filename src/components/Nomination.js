@@ -1,34 +1,48 @@
 import React from 'react';
 
-const DEFAULT_PLACEHOLDER_IMAGE = '';
+const Nominations = (props) => {
+  const { movies, nominations, nominationHandler } = props;
 
-const Nominations = ({ nominations }) => {
-  console.log(nominations);
   return (
-    <div className="nominations">
-      <h3>Results</h3>
-      {nominations.length !== 0 && (
+    <div className="nominations-wrapper">
+      <h3>Nominations</h3>
+      {nominations && (
         <table>
           <tbody>
-            {nominations.map((nomination, i) => {
+            {Object.values(nominations).map((movie, i) => {
+              const title =
+                movie.Title.length > 24
+                  ? `${movie.Title.slice(0, 24)}...`
+                  : movie.Title;
+
               return (
-                <tr className={`findResult ${i % 2 ? 'even' : 'odd'}`} key={i}>
-                  <td className="primary-photo">
-                    {nomination.Poster === 'N/A' ? (
-                      <div className="no-image">No Image</div>
-                    ) : (
-                      <img src={nomination.Poster}></img>
-                    )}
-                  </td>
-                  <td className="result-text">
-                    <p>
-                      {nomination.Title} ({nomination.Year})
-                    </p>
-                    <button className="nominate" onClick={() => {}}>
-                      Nominate
-                    </button>
-                  </td>
-                </tr>
+                nominations[movie.imdbID] && (
+                  <tr
+                    className={`findResult ${i % 2 ? 'even' : 'odd'}`}
+                    key={i}
+                  >
+                    <td className="primary-photo">
+                      {movie.Poster === 'N/A' ? (
+                        <div className="no-image">No Image</div>
+                      ) : (
+                        <img src={movie.Poster} alt="movie poster"></img>
+                      )}
+                    </td>
+                    <td className="result-text">
+                      <p>
+                        {title} ({movie.Year})
+                      </p>
+                      <button
+                        className="remove-bttn"
+                        onClick={() => {
+                          nominationHandler(movie, 'remove');
+                        }}
+                      >
+                        <span className="close">&times;</span>
+                      </button>
+                    </td>
+                  </tr>
+                )
               );
             })}
           </tbody>
