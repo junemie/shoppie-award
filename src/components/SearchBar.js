@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
-
 const SearchBar = (props) => {
   const [searchValue, setSearchValue] = useState('');
 
   const handleChange = (e) => {
-    setSearchValue(e.target.value);
-    props.search(searchValue);
+    e.preventDefault();
+    let searchWords = e.target.value;
+    setSearchValue(searchWords);
+    props.search(searchWords);
   };
-
-  const resetInputField = () => {
-    setSearchValue('');
-  };
-
   return (
     <label className="search-label" htmlFor="search-input">
       <input

@@ -1,34 +1,36 @@
-/* @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+.App {
+  height: 100vh;
+}
 .app-header {
-  background-color: #282c34;
-  height: 70px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
+  background-color: #dcc85a;
   color: white;
+  display: flex;
+  flex-direction: row;
+  font-size: 1.5rem;
+  justify-content: center;
   padding: 15px;
+  height: 70px;
+}
+h2 {
+  color: fffcd4;
 }
 
-/* h2 {
-  text-align: center;
-} */
-
+h3 {
+  color: #b7a064;
+}
+p {
+  display: inline-block;
+  margin: 0 0 5px 0;
+}
 .container {
   margin: 36px auto;
   width: 100%;
-  max-width: 800px;
+  max-width: 80%;
 }
 
 .search-label {
+  border-radius: 5px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -43,4 +45,113 @@ input {
   color: #444;
   outline: none;
   width: 100%;
+}
+
+tbody {
+  width: 500px;
+  border-spacing: 0 15px;
+}
+
+.container-wrapper {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.results-wrapper {
+  border-radius: 5px;
+  height: 100%;
+  min-height: 700px;
+  flex-grow: 2;
+  margin-right: 10px;
+  padding: 16px;
+}
+
+img {
+  width: 45px;
+  margin: auto;
+  display: block;
+}
+
+.primary-photo {
+  width: 32px;
+}
+
+.result-text {
+  padding: 4px 6px;
+  width: 100%;
+}
+
+.findResult :hover {
+  background-color: rgb(245 244 244);
+}
+
+.findResult.even {
+  background-color: #f6f6f5;
+}
+
+.findResult.odd {
+  background-color: #fbfbfb;
+}
+
+.nominations-wrapper {
+  border-radius: 5px;
+  width: 30%;
+  height: 400px;
+  padding: 16px;
+}
+
+.no-image {
+  height: 63px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  text-align: center;
+}
+
+button {
+  border: none;
+  text-align: center;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 5px;
+  outline: none;
+}
+
+.nominate-bttn {
+  background: #dcc85a;
+  border-radius: 5px;
+  border-bottom-width: 3px;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  float: right;
+  margin-bottom: 0;
+}
+
+.nominate-bttn:hover {
+  background: #c5a802;
+}
+.nominate-bttn:disabled {
+  cursor: not-allowed;
+  background-color: rgb(195, 195, 195);
+}
+
+.remove-bttn {
+  display: none;
+}
+
+tr:hover .remove-bttn {
+  display: block;
+  float: right;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.icon-img {
+  background-image: url('./award.png');
+  height: 40px;
+  width: 40px;
+  background-size: cover;
+  margin: 10px;
 }

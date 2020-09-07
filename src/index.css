@@ -3,9 +3,10 @@ body {
   font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
+  height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 code {
