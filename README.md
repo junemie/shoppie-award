@@ -27,3 +27,10 @@ Search and nominate up to 5 movies to Shoppie Awards! Type your favorite movie i
 - HTML
 - CSS
 - Material-UI
+
+
+## How to run locally:
+- clone this repository
+- run `npm install`
+- run `npm start`
+- your app is running on `http://localhost:3000/`
