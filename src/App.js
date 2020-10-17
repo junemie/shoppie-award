@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
-import '../App.css';
-import SearchBar from './SearchBar';
-import MovieResults from './MovieResults';
-import Nominations from './Nomination';
-import Toaster from './Toaster';
-import PopupModal from './PopupModal';
-import {fetchData} from '../services/movies'
+import './App.css';
+import {SearchBar, MovieResults, Nominations, Toaster, PopupModal} from './components';
+import {fetchData} from './services/movies'
 
 const App = () => {
   const [isLoading, setLoading] = useState(false);
