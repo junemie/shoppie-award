@@ -1,9 +1,9 @@
 ## Shoppie Award
 
-Website:
+<b>Website:https://shoppie-awards.netlify.app/ </b>
 
 <p align="center">
-  <img src="https://media.giphy.com/media/LOVfo1cDqbRoVhIJHm/giphy.gif">
+  <img src="https://media.giphy.com/media/kbQR5lHvnwxRmx6XsK/giphy.gif">
 </p>
 
 ## About
@@ -12,8 +12,8 @@ Search and nominate up to 5 movies to Shoppie Awards! Type your favorite movie i
 
 ## Features
 
-- Live Search using OMBD API to display movie results and used axios cancelToken, debounce method to optimize performance search performance to prevent uneceasry API calls
-- Add mmovie from the search results to nomination list
+- Live Search using OMBD API to display movie results. Used axios cancelToken to optimize search performance to prevent uneceasry API calls
+- Add movie from the search results to nomination list
 - View the list of films already nominated
 - Remove a nominee from the nomination list
 - Toaster notification when user have selected 5 movies
@@ -27,3 +27,10 @@ Search and nominate up to 5 movies to Shoppie Awards! Type your favorite movie i
 - HTML
 - CSS
 - Material-UI
+
+
+## How to run locally:
+- clone this repository
+- run `npm install`
+- run `npm start`
+- your app is running on `http://localhost:3000/`
