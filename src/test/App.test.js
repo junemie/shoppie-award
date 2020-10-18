@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Enzyme from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 import { expect } from 'chai';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import App from '../App';
 import { MovieResults, Nominations } from '../components';
 import { movies, nominationIds, nominations } from './testData';

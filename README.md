@@ -12,7 +12,7 @@ Search and nominate up to 5 movies to Shoppie Awards! Type your favorite movie i
 
 ## Features
 
-- Live Search using OMBD API to display movie results and used axios cancelToken to optimize performance search performance to prevent uneceasry API calls
+- Live Search using OMBD API to display movie results and used axios cancelToken, debounce method to optimize performance search performance to prevent uneceasry API calls
 - Add mmovie from the search results to nomination list
 - View the list of films already nominated
 - Remove a nominee from the nomination list
