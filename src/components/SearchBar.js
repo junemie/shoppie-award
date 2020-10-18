@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
+import _ from 'lodash';
+
 const SearchBar = (props) => {
   const [searchValue, setSearchValue] = useState('');
+  const [searchQuery, setSearchQuery] = useState({})
 
   const handleChange = (e) => {
     e.preventDefault();
     let searchWords = e.target.value;
     setSearchValue(searchWords);
-    props.search(searchWords);
+
+    const search = _.debounce(props.search, 300);
+
+    setSearchQuery(prevSearch => {
+      if (prevSearch.cancel) {
+        prevSearch.cancel();
+      }
+      return search;
+    });
+
+    if(searchWords) {
+      search(searchWords);
+    }
   };
   return (
     <label className="search-label" htmlFor="search-input">

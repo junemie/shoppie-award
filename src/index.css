@@ -6,9 +6,4 @@ body {
   height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-transform: uppercase; */
-}
-
-code {
-  font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
 }

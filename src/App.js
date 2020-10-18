@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import '../App.css';
-import SearchBar from './SearchBar';
-import MovieResults from './MovieResults';
-import Nominations from './Nomination';
-import Toaster from './Toaster';
-import PopupModal from './PopupModal';
-
-let CancelToken = axios.CancelToken;
-let source = CancelToken.source();
-let queryMemo = {};
+import './App.css';
+import {SearchBar, MovieResults, Nominations, Toaster, PopupModal} from './components';
+import {fetchData} from './services/movies'
 
 const App = () => {
   const [isLoading, setLoading] = useState(false);
@@ -18,13 +10,16 @@ const App = () => {
   const [nominationIds, setNominationIds] = useState({});
   const [showToaster, setToaster] = useState(false);
 
+  /**
+   * Sends the search value to the API
+   * @param {*} searchValue string
+   */
+
   const search = async (searchValue) => {
     setLoading(true);
     setErrorMessage(null);
+    const response = await fetchData(searchValue);
 
-    let searchUrl = `https://www.omdbapi.com/?s=${searchValue}&apikey=5f88844d`;
-
-    const response = await searchRequest(searchUrl, searchValue);
     if (response.Response === 'True') {
       //found the movie
       setMovies(response.Search);
@@ -44,37 +39,15 @@ const App = () => {
     }
   };
 
-  //API Request
-  const searchRequest = async (searchUrl, searchValue) => {
-    //Cancel prev request
-    source && source.cancel('Operation canceled due to new request.');
-    // Create a new CancelToken
-    source = axios.CancelToken.source();
-    try {
-      if (queryMemo[searchValue]) {
-        return queryMemo[searchValue];
-      }
-      let res = await axios.get(searchUrl, {
-        cancelToken: source.token,
-      });
-      const result = res.data;
-      // Store response
-      queryMemo[searchValue] = result;
-      return result;
-    } catch (error) {
-      if (axios.isCancel(error)) {
-        // Handle if request was cancelled
-        return error.message;
-      } else {
-        // Handle usual errors
-        return 'Please try again';
-      }
-    }
-  };
-
   const toasterHandler = () => {
     setToaster(!showToaster);
   };
+
+  /**
+   * Function adds/deletes movie from nomination
+   * @param {*} data object
+   * @param {*} action string
+   */
 
   const nominationHandler = (data, action) => {
     if (action === 'add') {
